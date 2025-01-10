@@ -9,12 +9,12 @@ from utils import SimpleCNN, train_dataset, train_loader, test_dataset, test_loa
 from torch.utils.tensorboard import SummaryWriter
 from collections import Counter
 # Initialize TensorBoard writer
-writer = SummaryWriter(log_dir="runs/pokemon_training")
+writer = SummaryWriter(log_dir="runs/pokemon_training_2")
 
 # Model Initialization
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = SimpleCNN(num_classes=len(train_dataset.classes)).to(device)
-
+print(f'Training on {device}')
 # Loss and Optimizer
 # Count class samples in your dataset
 class_counts = Counter(train_dataset.labels)
@@ -28,7 +28,7 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 
 # Training Loop
-num_epochs = 20
+num_epochs = 30
 for epoch in range(num_epochs):
     model.train()
     running_loss = 0.0
