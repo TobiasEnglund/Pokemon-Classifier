@@ -5,6 +5,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
 from PIL import Image
+from torchvision import transforms
 
 # Dataset Class
 class PokemonDataset(Dataset):
@@ -54,24 +55,19 @@ class SimpleCNN(nn.Module):
 
 
 
-# Custom Transformations
-def resize(image, size):
-    return image.resize(size, Image.Resampling.LANCZOS)
 
-def to_tensor(image):
-    array = np.array(image) / 255.0
-    return torch.tensor(array.transpose((2, 0, 1)), dtype=torch.float32)
+# Custom Transformations with Data Augmentation
+custom_transform = transforms.Compose([
+    transforms.RandomResizedCrop(128),          # Randomly crop and resize images to 128x128
+    transforms.RandomHorizontalFlip(p=0.5),    # Flip images horizontally with a 50% chance
+    transforms.ColorJitter(brightness=0.2,     # Adjust brightness, contrast, and saturation
+                           contrast=0.2,
+                           saturation=0.2),
+    transforms.ToTensor(),                     # Convert images to PyTorch tensors
+    transforms.Normalize(mean=[0.485, 0.456, 0.406],  # Normalize with ImageNet stats
+                         std=[0.229, 0.224, 0.225]),
+])
 
-def normalize(tensor, mean, std):
-    for t, m, s in zip(tensor, mean, std):
-        t.sub_(m).div_(s)
-    return tensor
-
-def custom_transform(image):
-    image = resize(image, (128, 128))
-    tensor = to_tensor(image)
-    tensor = normalize(tensor, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-    return tensor
 
 # Dataset and DataLoader
 train_dataset = PokemonDataset(root_dir='data/train', transform=custom_transform)
