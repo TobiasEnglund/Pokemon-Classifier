@@ -71,7 +71,9 @@ custom_transform = transforms.Compose([
 
 # Dataset and DataLoader
 train_dataset = PokemonDataset(root_dir='data/train', transform=custom_transform)
+val_dataset = PokemonDataset(root_dir='data/val', transform=custom_transform)
 test_dataset = PokemonDataset(root_dir='data/test', transform=custom_transform)
 
-train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
-test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
+train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
+val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False)
+test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
