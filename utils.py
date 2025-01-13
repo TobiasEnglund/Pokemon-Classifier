@@ -9,6 +9,7 @@ from PIL import Image
 from typing import Dict, Any
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
+from torchvision.models import ResNet18_Weights
 
 # Albumentations transform wrapper
 class AlbumentationsTransform:
@@ -82,7 +83,7 @@ class PokemonDataset(Dataset):
 class PokemonResNet(nn.Module):
         def __init__(self, num_classes):
             super(PokemonResNet, self).__init__()
-            self.base_model = models.resnet18(pretrained=True)
+            self.base_model = models.resnet18(weights=ResNet18_Weights.DEFAULT)
             in_features = self.base_model.fc.in_features
             self.base_model.fc = nn.Linear(in_features, num_classes)
 
