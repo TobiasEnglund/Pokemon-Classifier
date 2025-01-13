@@ -77,7 +77,7 @@ class PokemonDataset(Dataset):
         if self.transform:
             image = self.transform(image)
         return image, label    
-
+    
 # Model
 class PokemonResNet(nn.Module):
         def __init__(self, num_classes):
