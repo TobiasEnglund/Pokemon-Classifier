@@ -5,7 +5,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
 from PIL import Image
-from utils import SimpleCNN, train_dataset, train_loader, test_dataset, test_loader, val_dataset, val_loader
+from utils import PokemonResNet, train_dataset, train_loader, test_dataset, test_loader, val_dataset, val_loader
 
 from torch.utils.tensorboard import SummaryWriter
 from collections import Counter
@@ -14,7 +14,7 @@ writer = SummaryWriter(log_dir="runs/pokemon_training_2")
 
 # Model Initialization
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-model = SimpleCNN(num_classes=len(train_dataset.classes)).to(device)
+model = PokemonResNet(num_classes=len(train_dataset.classes)).to(device)
 print(f'Training on {device}')
 # Loss and Optimizer
 # Count class samples in your dataset

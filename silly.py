@@ -2,11 +2,11 @@ import torch
 import os
 from PIL import Image
 import numpy as np
-from utils import SimpleCNN, custom_transform
+from utils import PokemonResNet, custom_transform
 
 # Load the model
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-model = SimpleCNN(num_classes=len(next(os.walk('data/train'))[1]))  # Replace YOUR_NUM_CLASSES with the number of Pokémon classes
+model = PokemonResNet(num_classes=len(next(os.walk('data/train'))[1]))  # Replace YOUR_NUM_CLASSES with the number of Pokémon classes
 model.load_state_dict(torch.load("pokemon_cnn_model.pth"))
 model = model.to(device)
 model.eval()
