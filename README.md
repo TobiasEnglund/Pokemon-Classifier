@@ -26,6 +26,27 @@ The goal is to classify images of pokémons into various classes/species (e.g Bu
 - ``pokemon_resnet18.pth``: The saved model.  
 
 ### Dataset
-
 We used [this](https://www.kaggle.com/datasets/noodulz/pokemon-dataset-1000/data) dataset from Kaggle.  
 It consists of more than 26000 images of 1000 pokémons, split into test, train, and validation, including a csv file with metadata.
+
+### Results
+After experimenting with various transforms we decided to go with these (using the Albumentations library):
+- **HueSaturationValue** 
+- **RandomBrightnessContrast**
+- **GaussNoise** 
+- **ColorJitter**
+
+We also experimented with different models and decided to go with a pre-trained ResNet18 model:
+
+    class PokemonResNet(nn.Module):
+        def __init__(self, num_classes):
+            super(PokemonResNet, self).__init__()
+            self.base_model = models.resnet18(weights=ResNet18_Weights.DEFAULT)
+            in_features = self.base_model.fc.in_features
+            self.base_model.fc = nn.Linear(in_features, num_classes)
+
+        def forward(self, x):
+            x = self.base_model(x)
+            return x
+
+With these augmentations and this model we were able to achieve a testing accuracy of **90.52%**.
