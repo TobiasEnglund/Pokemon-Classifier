@@ -14,7 +14,8 @@ The goal is to classify images of pokémons into various classes/species (e.g Bu
 ├── silly.py              
 ├── augmentation_results.ipynb              
 ├── model_testing_results.ipynb   
-└── pokemon_resnet18.pth          
+├── pokemon_resnet18.pth
+└── eda.ipynb 
 
 - ``requirements.txt``: Required packages to run this project.  
 - ``utils.py``: Utilities - dataset, augmentation, and model for classification.  
@@ -24,6 +25,7 @@ The goal is to classify images of pokémons into various classes/species (e.g Bu
 - ``augmentation_results.ipynb``: Notebook summarizing the results from testing various transforms.  
 - ``model_testing_results.ipynb``: Notebook summarizing the results from testing various models.  
 - ``pokemon_resnet18.pth``: The saved model.  
+- ``eda.ipynb``: Exploratory Data Analysis to understand dataset structure, attribute distributions, and class imbalances.
 
 ### Dataset
 We used [this](https://www.kaggle.com/datasets/noodulz/pokemon-dataset-1000/data) dataset from Kaggle.  
