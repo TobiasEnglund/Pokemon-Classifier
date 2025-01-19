@@ -15,7 +15,7 @@ The goal is to classify images of pokémons into various classes/species (e.g Bu
 ├── augmentation_results.ipynb              
 ├── model_testing_results.ipynb   
 ├── pokemon_resnet18.pth
-└── eda.ipynb 
+└── eda.ipynb
 
 - ``requirements.txt``: Required packages to run this project.  
 - ``utils.py``: Utilities - dataset, augmentation, and model for classification.  
